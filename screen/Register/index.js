@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import Login from '../Login';
 
-
-function Register({navigations}){
+function Register({navigation}){
     return(
         <View style={styles.container}>
       <Text style={styles.textlogo}>Register</Text>

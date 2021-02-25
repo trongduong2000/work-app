@@ -1,14 +1,15 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
         //touchableopactity: click; stylesheet: css 
-function Login({navigations}){
+        
+function Login({navigation}){
     return(
         
         <View style={styles.hello}> 
-            <Image source={require('../image/cv.jpg')}
-                    style={styles.img}>
+         <Image source={require('../../image/cv.jpg')}
+            style={styles.img}>
+        </Image>
             
-            </Image>
             <TextInput style={styles.input}
                     placeholder='Username'> 
             
@@ -21,10 +22,9 @@ function Login({navigations}){
                 <Text style={styles.textlg}>Login</Text>
             </TouchableOpacity>
             <Text style={styles.TextSignUp}
-                    onPress={() => navigation.navigate("Register")}
-        >
-          Sign up
-        </Text>
+                    onPress={() => navigation.navigate("Register")}>
+                 Sign up
+            </Text>
         </View>
     )
 }
