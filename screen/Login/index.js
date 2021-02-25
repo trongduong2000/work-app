@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
         //touchableopactity: click; stylesheet: css 
-function Login({}){
+function Login({navigations}){
     return(
         
         <View style={styles.hello}> 
@@ -20,7 +20,11 @@ function Login({}){
             <TouchableOpacity style={styles.button}> 
                 <Text style={styles.textlg}>Login</Text>
             </TouchableOpacity>
-            
+            <Text style={styles.TextSignUp}
+                    onPress={() => navigation.navigate("Register")}
+        >
+          Sign up
+        </Text>
         </View>
     )
 }
@@ -60,5 +64,10 @@ const styles=StyleSheet.create({
           fontWeight:'bold',
           color:'#fff'
       },
+      TextSignUp:{
+          fontSize:13,
+          color: 'red', 
+          marginBottom:8,
+      }
 })//kieu nhu css
 export default Login;
