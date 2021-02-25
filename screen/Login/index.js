@@ -67,7 +67,8 @@ const styles=StyleSheet.create({
       TextSignUp:{
           fontSize:13,
           color: 'red', 
-          marginBottom:8,
+         marginTop:10,
+        
       }
 })//kieu nhu css
 export default Login;
