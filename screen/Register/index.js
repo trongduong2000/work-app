@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
       marginBottom: 10,
     },
     textlogo: {
-      fontSize: 40,
+      fontSize: 30,
       fontWeight: "bold",
       marginBottom: 50,
       color: "red",
