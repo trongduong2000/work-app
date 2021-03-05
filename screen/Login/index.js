@@ -54,13 +54,12 @@ function Login({ navigation }) {
                     Login
             </Text>
         </TouchableOpacity>
-        <View>
+        <TouchableOpacity>
           <Text
-            style={styles.TextSignUp}
-          >
+            style={styles.TextSignUp}>
                 Sign up
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>
   );
