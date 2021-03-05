@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Login from '../screen/Login';
-import Register from '../screen/Register';
+import Job from '../screen/Job'
 
 const Stack = createStackNavigator();
 
@@ -11,7 +11,7 @@ function RootNavigation() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown:false}}>
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Register}/>
+          <Stack.Screen name="Joblist" component={Job}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
