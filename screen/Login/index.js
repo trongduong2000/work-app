@@ -57,7 +57,7 @@ function Login({ navigation }) {
         <View>
           <Text
             style={styles.TextSignUp}
-            onPress={() => navigation.navigate("Register")}>
+          >
                 Sign up
           </Text>
         </View>
