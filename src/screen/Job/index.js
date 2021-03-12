@@ -8,11 +8,12 @@ import {
   Alert,
 } from "react-native";
 import data from "../../service/Jobs";
-import Header from '../../components/Header/header';
-
+import Header from "../../components/Header/header";
+import { useNavigation } from "@react-navigation/native";
 function ItemList({ data }) {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("JobDetail", { idJobs: data.id })}>
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.id}>
@@ -21,9 +22,9 @@ function ItemList({ data }) {
           </Text>
           <Text style={styles.header}>{data.name}</Text>
           <Text style={styles.contentJob}>{data.content}</Text>
-          <Text style={styles.date}>Date: {data.date}</Text>
+          <Text style={styles.date}>Ngày : {data.date}</Text>
           <Text style={[styles.time, { textTransform: "uppercase" }]}>
-            Time: {data.time}
+            Giờ: {data.time}
           </Text>
           <Text style={styles.last}>Khoảng: {data.last}</Text>
         </View>
@@ -51,7 +52,6 @@ function Job({ navigation }) {
 const styles = StyleSheet.create({
   waper: {
     flex: 1,
-
   },
   container: {
     paddingTop: 20,

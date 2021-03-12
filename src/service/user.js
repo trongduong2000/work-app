@@ -1,5 +1,5 @@
 const User = {
-    username: 'trong',
+    username: 'Trong',
     password: '123'
 }
 
