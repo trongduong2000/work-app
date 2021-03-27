@@ -15,18 +15,18 @@ import {
 import User from "../../service/user";
 
 function Login({ navigation }) {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(""); //tạo kho chứa dữ liệu trả về 2 mảng trong []
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
     if (username.trim() === "") {
-      return Alert.alert("Tai khoan khong duoc de trong.");
+      return Alert.alert("Tài khoản không được để trống.");
     }
     if (password.trim() === "") {
-      return Alert.alert("Mat Khau khong duoc de trong.");
+      return Alert.alert("Mật khẩu không được để trống.");
     }
     if (username !== User.username || password !== User.password) {
-      return Alert.alert("tai khoan hoac mat khau khong chinh sac !");
+      return Alert.alert("Tài khoản hoặc Mật khẩu không chính xác !");
     }
     navigation.navigate("Joblist");
   };

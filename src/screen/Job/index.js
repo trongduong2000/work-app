@@ -1,105 +1,43 @@
-import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
+import React, { 
+  useContext, //tạo khoang chứa dữ liệu và lấy dữ liệu từ.....
+   useEffect, //sử lý logic...
+ } from "react";
+import { 
+  View, 
+  Text, 
   FlatList,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import data from "../../service/Jobs";
+ } from "react-native";
+import Item from "./item";
 import Header from "../../components/Header/header";
-import { useNavigation } from "@react-navigation/native";
-function ItemList({ data }) {
-  const navigation = useNavigation();
-  return (
-    <TouchableOpacity onPress={() => navigation.navigate("JobDetail", { idJobs: data.id })}>
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <Text style={styles.id}>
-            {data.id}
-            {"."}
-          </Text>
-          <Text style={styles.header}>{data.name}</Text>
-          <Text style={styles.contentJob}>{data.content}</Text>
-          <Text style={styles.date}>Ngày : {data.date}</Text>
-          <Text style={[styles.time, { textTransform: "uppercase" }]}>
-            Giờ: {data.time}
-          </Text>
-          <Text style={styles.last}>Khoảng: {data.last}</Text>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-}
+import ApplicationStyles from "../../Themes/AplicationStyles";
+import styles from "./styles";
+import Context from "../Context";
+import Jobs from "../../service/Jobs";
 
-function Job({ navigation }) {
+function JobList({ navigation }) {
+  const [context, setContext] = useContext(Context);
+
+  useEffect(() => {
+    setContext([...Jobs]);
+  }, []);
+
   return (
-    <View style={styles.waper}>
+    <View style={ApplicationStyles.screen.container}>
       <Header
-        title="Danh sach cong viec"
-        onBack={() => navigation.navigate("Login")}
+        label="ToDo"
+        rightComponent={<Text>Add</Text>}
+        rightButton={() => navigation.navigate("AddJob")}
       ></Header>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <ItemList data={item}></ItemList>}
-      ></FlatList>
+      <View style={styles.content}>
+        <FlatList
+          data={context}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => {
+            return <Item data={item}></Item>;
+          }}
+        ></FlatList>
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  waper: {
-    flex: 1,
-  },
-  container: {
-    paddingTop: 20,
-    overflow: "hidden",
-  },
-  containerImage: { width: 100, height: 150 },
-  image: {
-    width: 100,
-    height: 150,
-    resizeMode: "contain",
-  },
-  content: {
-    marginLeft: 10,
-    flex: 1,
-  },
-  header: {
-    fontSize: 20,
-    marginBottom: 10,
-    fontWeight: "bold",
-    color: "blue",
-    textDecorationLine: "underline",
-    textTransform: "uppercase",
-  },
-  contentJob: {
-    fontSize: 15,
-    marginBottom: 10,
-  },
-  date: {
-    fontSize: 10,
-    marginBottom: 10,
-    fontStyle: "italic",
-    textTransform: "uppercase",
-  },
-  time: {
-    fontStyle: "italic",
-    fontSize: 10,
-    marginBottom: 10,
-    textTransform: "uppercase",
-  },
-  last: {
-    fontSize: 15,
-    marginBottom: 10,
-    fontWeight: "bold",
-  },
-  id: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "red",
-  },
-});
-export default Job;
+export default JobList;

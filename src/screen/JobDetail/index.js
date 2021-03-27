@@ -1,107 +1,75 @@
-import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, } from "react-native";
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { View, Text, ScrollView } from "react-native";
+import styles from "./styles";
 import Header from "../../components/Header/header";
-import Jobs from "../../service/Jobs";
+import Context from "../Context";
+import ApplicationStyles from "../../Themes/AplicationStyles";
 
-function JobDetail({ navigation, route }) {
-  const { idJobs } = route.params;
-  const Job = Jobs.filter((item) => item.id === idJobs)[0];
-  console.log(Jobs);
+function JobDetail({ route }) {
+  const { idJob } = route.params;
+  const [job, setJob] = useState({});
+  const [context, setContext] = useContext(Context);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const job = context.find((item) => item.id === idJob.id);
+    setJob(job);
+  }, []);
+
   return (
-    <View style={styles.waper}>
+    <View style={ApplicationStyles.screen.container}>
       <Header
-        onBack={() => navigation.goBack()}
-        title="Chi tiết công viêc"
+        goBack={() => navigation.navigate("Joblist")}
+        label={job.name}
       ></Header>
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.item}>
-            <Text style={styles.title}>{Job.name}</Text>
-          </View>
-          <View style={styles.item}>
-            <Text style={styles.content}>{Job.content}</Text>
-          </View>
-          <View style={styles.item}>
-            <Text style={styles.content}>Ngày: {Job.date}</Text>
-          </View>
-          <View style={styles.item}>
-            <Text style={styles.content}>Bắt đầu lúc: {Job.time}</Text>
-          </View>
-          <View style={styles.item}>
-            <Text style={styles.content}>Trong khoảng: {Job.last}</Text>
-          </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.content}>
+          <Text
+            style={{
+              fontSize: 25,
+              marginBottom: 20,
+            }}
+          >
+            {job.name}
+          </Text>
+          {job &&
+            job.content &&
+            job.content.map((item, index) => {
+              return (
+                <View
+                  key={index.toString()}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <View
+                    style={{
+                      height: 10,
+                      width: 10,
+                      backgroundColor: "#000",
+                      borderRadius: 5,
+                      marginRight: 5,
+                    }}
+                  ></View>
+                  <Text>{item} </Text>
+                </View>
+              );
+            })}
+          <Text
+            style={{
+              fontSize: 13,
+              fontWeight: "bold",
+            }}
+          >
+            Time create: {job.time}
+          </Text>
         </View>
       </ScrollView>
-      <TouchableOpacity
-					style={{
-						backgroundColor: '#000',
-						width: '100%',
-						height: 40,
-						borderRadius: 7,
-						justifyContent: 'center',
-						alignItems: 'center',
-                        marginBottom:10,
-					}}
-				>
-					<Text
-						style={{
-							color: '#fff',
-							fontSize: 15,
-							fontWeight: 'bold',
-						}}
-					>
-						Update
-					</Text>
-				</TouchableOpacity>
-                <TouchableOpacity
-					style={{
-						backgroundColor: '#000',
-						width: '100%',
-						height: 40,
-						borderRadius: 7,
-						justifyContent: 'center',
-						alignItems: 'center',
-					}}
-                   
-				>
-					<Text
-						style={{
-							color: 'red',
-								fontWeight: 'bold',
-						}}
-					>
-						Delete
-					</Text>
-				</TouchableOpacity>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  waper: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-  },
-  content: {
-    marginLeft: 10,
-    flex: 1,
-  },
-  header: {
-    fontSize: 20,
-    marginBottom: 10,
-    fontWeight: "bold",
-    color: "black",
-    textTransform: "uppercase",
-  },
 
-  item: {
-    marginHorizontal: 16,
-    marginVertical: 5,
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 25,
-  },
-});
 export default JobDetail;
